@@ -56,4 +56,19 @@
         android:layout_height="wrap_content"
         android:text="Unbind from service"/>
 
+    <!--Schedule a job -->
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="onScheduleJob"
+        android:text="Schedule job"/>
+
+    <!-- Start a service in its own process -->
+    <Button
+        android:text="Start a new process"
+        android:onClick="onServiceNewProcess"
+        android:id="@+id/btnServiceNewProcess"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
 </LinearLayout>
