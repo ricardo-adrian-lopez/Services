@@ -2,6 +2,7 @@ package com.mobileapps.training.services;
 
 import android.app.IntentService;
 import android.content.Intent;
+import android.util.Log;
 
 
 /**
@@ -11,50 +12,41 @@ import android.content.Intent;
  * TODO: Customize class - update intent actions and extra parameters.
  */
 public class MyIntentService extends IntentService {
-    // TODO: Rename actions, choose action names that describe tasks that this
-    // IntentService can perform, e.g. ACTION_FETCH_NEW_ITEMS
-    public static final String ACTION_FOO = "com.mobileapps.training.services.action.FOO";
-    public static final String ACTION_BAZ = "com.mobileapps.training.services.action.BAZ";
 
-    // TODO: Rename parameters
-    public static final String EXTRA_PARAM1 = "com.mobileapps.training.services.extra.PARAM1";
-    public static final String EXTRA_PARAM2 = "com.mobileapps.training.services.extra.PARAM2";
+    private static final String TAG = "MyIntentService";
 
     public MyIntentService() {
         super("MyIntentService");
     }
 
     @Override
+    public void onCreate() {
+        Log.d(TAG, "onCreate: ");
+        super.onCreate();
+    }
+
+    @Override
     protected void onHandleIntent(Intent intent) {
-        if (intent != null) {
-            final String action = intent.getAction();
-            if (ACTION_FOO.equals(action)) {
-                final String param1 = intent.getStringExtra(EXTRA_PARAM1);
-                final String param2 = intent.getStringExtra(EXTRA_PARAM2);
-                handleActionFoo(param1, param2);
-            } else if (ACTION_BAZ.equals(action)) {
-                final String param1 = intent.getStringExtra(EXTRA_PARAM1);
-                final String param2 = intent.getStringExtra(EXTRA_PARAM2);
-                handleActionBaz(param1, param2);
+        Log.d(TAG, "onHandleIntent: ");
+        Log.d(TAG, "onHandleIntent: Thread: " +Thread.currentThread().getName());
+
+        Log.d(TAG, "onHandleIntent: Task starting");
+
+        for (int i = 0; i < 4; i++) {
+
+            try {
+                Thread.sleep(500);
+                Log.d(TAG, "onHandleIntent: " + i);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
         }
+
     }
 
-    /**
-     * Handle action Foo in the provided background thread with the provided
-     * parameters.
-     */
-    private void handleActionFoo(String param1, String param2) {
-        // TODO: Handle action Foo
-        throw new UnsupportedOperationException("Not yet implemented");
-    }
-
-    /**
-     * Handle action Baz in the provided background thread with the provided
-     * parameters.
-     */
-    private void handleActionBaz(String param1, String param2) {
-        // TODO: Handle action Baz
-        throw new UnsupportedOperationException("Not yet implemented");
+    @Override
+    public void onDestroy() {
+        Log.d(TAG, "onDestroy: ");
+        super.onDestroy();
     }
 }
